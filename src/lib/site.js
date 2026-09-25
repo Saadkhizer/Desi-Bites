@@ -12,7 +12,12 @@ export const site = {
   urduTagline: "گھر جیسا کھانا، روز تازہ",
   description:
     "Desi Bites cooks homemade Pakistani food in Islamabad — daal chawal, chicken haleem, chana pulao, achari keema, Lahori chanay and more. Fresh every day, hygienic, and delivered hot. Order online in a minute.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://desi-bites.vercel.app", // ⚠ set real domain in Vercel env
+  // Real domain via NEXT_PUBLIC_SITE_URL; on Vercel it falls back to the
+  // project's production URL automatically (needed for WhatsApp link previews).
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
+    "https://desi-bites.vercel.app",
 
   // ⚠ CONFIRM — this number comes from a public map listing, not the client.
   // Format: country code, no +, no spaces (used by wa.me links).
