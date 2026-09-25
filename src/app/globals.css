@@ -1,0 +1,219 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   DESI BITES — "Masala" duotone
+   House style: restaurant-duotone-ui (warm cream canvas, exactly two
+   saturated accents). Deep = brick/red-chilli, Pop = haldi (turmeric).
+   Contrast verified (WCAG):
+     foreground/background 15.77 · muted/background 5.86
+     accent-deep/background 7.61 · light-on-deep 7.61
+     dark-on-pop 9.48 · pop-on-deep 4.58 (large display only)
+   RULE: --accent-pop is FILL ONLY on cream (1.66:1). Never small text.
+   Rebrand = edit this :root block only. No hex inside components.
+   --------------------------------------------------------------- */
+:root {
+  --background: #f8f1e4;
+  --surface: #f0e5d0;
+  --surface-2: #e9dcc2;
+  --border: #e0d0b3;
+  --foreground: #23150f;
+  --muted: #6b5a4c;
+
+  --accent-deep: #8c2a12;
+  --accent-pop: #f4b224;
+  --accent-deep-foreground: #f8f1e4;
+  --accent-pop-foreground: #23150f;
+
+  --tone-positive: #1f6b3a;
+
+  --radius-card: 20px;
+  --radius-band: 36px;
+  --radius-pill: 999px;
+  --section-gap: 7rem;
+  --shadow-lift: 0 18px 32px -14px rgb(35 21 15 / 0.22);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-gap: 4.5rem;
+    --radius-band: 22px;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-deep: var(--accent-deep);
+  --color-pop: var(--accent-pop);
+  --color-on-deep: var(--accent-deep-foreground);
+  --color-on-pop: var(--accent-pop-foreground);
+  --color-positive: var(--tone-positive);
+
+  --radius-card: var(--radius-card);
+  --radius-band: var(--radius-band);
+
+  /* Fonts are self-hosted via @fontsource (imported in layout.js) —
+     never next/font/google, which stalls dev on filtered networks. */
+  --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-flourish: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-urdu: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", serif;
+
+  --animate-marquee: marquee var(--marquee-duration, 38s) linear infinite;
+  --animate-marquee-rev: marquee-rev var(--marquee-duration, 44s) linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes marquee-rev {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+@keyframes steam {
+  0% { transform: translateY(6px) scaleX(1); opacity: 0; }
+  30% { opacity: 0.55; }
+  100% { transform: translateY(-26px) scaleX(1.25); opacity: 0; }
+}
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--tone-positive) 45%, transparent); }
+  50% { box-shadow: 0 0 0 6px transparent; }
+}
+
+html {
+  scroll-padding-top: 8rem;
+}
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-optical-sizing: auto;
+}
+
+/* Subtle paper grain — one static SVG noise, no filter cost at runtime. */
+html, body { overflow-x: clip; }
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ---------- reusable pieces ----------
+   In @layer components so Tailwind utilities (hidden, sm:inline-flex…)
+   can still override them. */
+@layer components {
+.flourish {
+  font-family: var(--font-flourish);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.urdu {
+  font-family: var(--font-urdu);
+  direction: rtl;
+  line-height: 2.1;
+}
+.badge-pop {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent-pop);
+  color: var(--accent-pop-foreground);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 0.3rem 0.7rem;
+  white-space: nowrap;
+}
+.badge-soft {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: var(--radius-pill);
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  white-space: nowrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3rem;
+  padding: 0 1.4rem;
+  border-radius: var(--radius-pill);
+  font-weight: 650;
+  font-size: 0.975rem;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s, box-shadow 0.25s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active { transform: scale(0.96); }
+.btn-deep { background: var(--accent-deep); color: var(--accent-deep-foreground); }
+.btn-deep:hover { box-shadow: var(--shadow-lift); }
+.btn-pop { background: var(--accent-pop); color: var(--accent-pop-foreground); }
+.btn-pop:hover { box-shadow: var(--shadow-lift); }
+.btn-ghost { border: 1px solid var(--border); color: var(--foreground); background: transparent; }
+.btn-ghost:hover { background: var(--surface); }
+
+.card-lift {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s;
+}
+@media (hover: hover) {
+  .card-lift:hover { transform: translateY(-5px); box-shadow: var(--shadow-lift); }
+}
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+.steam path { animation: steam 2.8s ease-out infinite; transform-box: fill-box; transform-origin: center bottom; }
+.steam path:nth-child(2) { animation-delay: 0.9s; }
+.steam path:nth-child(3) { animation-delay: 1.8s; }
+
+.live-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+.mask-fade-x {
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+}
+
+/* JS-driven reveals start hidden ONLY once JS has confirmed it can run,
+   so content stays visible (and indexable) if scripts fail. */
+.js [data-reveal] { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js [data-reveal] { opacity: 1; }
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--accent-deep);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+::selection {
+  background: var(--accent-pop);
+  color: var(--accent-pop-foreground);
+}
