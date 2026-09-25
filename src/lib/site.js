@@ -22,6 +22,10 @@ export const site = {
   // ⚠ CONFIRM — this number comes from a public map listing, not the client.
   // Format: country code, no +, no spaces (used by wa.me links).
   whatsapp: "923425554160",
+  // DEMO MODE: WhatsApp links open the contact picker instead of messaging
+  // the restaurant, so test orders from the demo never reach a real number.
+  // Set to false once the client confirms the number above.
+  demoMode: true,
   phoneDisplay: "+92 342 555 4160",
 
   address: {

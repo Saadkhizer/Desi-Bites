@@ -6,6 +6,7 @@ import { useCart } from "./CartProvider";
 import { useDialog } from "./useDialog";
 import { byId, formatPKR } from "@/lib/menu";
 import { MM } from "@/lib/motion";
+import { site } from "@/lib/site";
 import { buildOrderMessage, waLink } from "@/lib/whatsapp";
 import DishImage from "@/components/ui/DishImage";
 import { IconClose, IconMinus, IconPlus, IconWhatsApp, IconBag, IconCheck } from "@/components/ui/Icons";
@@ -128,6 +129,11 @@ function Drawer({ onClose }) {
         ) : (
           <form onSubmit={submit} noValidate className="flex min-h-0 flex-1 flex-col">
             <div className="flex-1 space-y-4 overflow-y-auto overscroll-contain px-5 pb-4 sm:px-6" data-lenis-prevent>
+              {site.demoMode && (
+                <p className="rounded-2xl border border-pop bg-pop/25 px-4 py-3 text-sm leading-snug">
+                  <strong>Demo:</strong> WhatsApp will open with your order written out. Pick any chat to see it. Nothing is sent to the restaurant.
+                </p>
+              )}
               <div role="radiogroup" aria-label="Order type" className="grid grid-cols-2 gap-1 rounded-full bg-surface p-1">
                 {["delivery", "pickup"].map((m) => (
                   <button

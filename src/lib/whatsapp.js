@@ -3,7 +3,7 @@ import { formatPKR } from "./menu";
 
 /** wa.me link with text pre-filled. */
 export function waLink(text = "") {
-  const base = `https://wa.me/${site.whatsapp}`;
+  const base = site.demoMode ? "https://wa.me/" : `https://wa.me/${site.whatsapp}`;
   return text ? `${base}?text=${encodeURIComponent(text)}` : base;
 }
 
