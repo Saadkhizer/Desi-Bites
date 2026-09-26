@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { motion, useAnimationControls } from "motion/react";
 import { nav, site } from "@/lib/site";
 import { useCart } from "@/components/cart/CartProvider";
-import { HandiMark, IconBag } from "@/components/ui/Icons";
+import Image from "next/image";
+import { IconBag } from "@/components/ui/Icons";
 import OpenBadge from "@/components/ui/OpenBadge";
 
 export default function Header() {
@@ -31,13 +32,20 @@ export default function Header() {
     >
       <div className="mx-auto flex h-18 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
         <a href="#top" className="group flex items-center gap-2.5" aria-label={`${site.name} — home`}>
-          <HandiMark className="h-10 w-10 text-deep transition-transform duration-500 group-hover:-rotate-6" />
+          <Image
+            src="/brand/logo.png"
+            alt=""
+            width={48}
+            height={48}
+            priority
+            className="h-12 w-12 transition-transform duration-500 group-hover:-rotate-12"
+          />
           <span className="leading-none">
             <span className="block text-[1.35rem] font-extrabold tracking-tight">
-              Desi <span className="flourish text-deep text-[1.5rem]">Bites</span>
+              Desi <span className="flourish text-deep text-[1.5rem]">Bite</span>
             </span>
             <span className="block text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-muted">
-              Homemade · Islamabad
+              Chinese &amp; Fast Food
             </span>
           </span>
         </a>

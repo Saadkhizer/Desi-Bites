@@ -1,6 +1,6 @@
-# Desi Bites — demo website
+# Desi Bite — demo website
 
-Homemade Pakistani food, Islamabad. A one-page ordering site built as a client demo by Neural Stack.
+Chinese & Fast Food, Bahria Enclave, Islamabad. A one-page ordering site built as a client demo by Neural Stack.
 
 **Stack:** Next.js 16 (App Router, Turbopack) · React 19 · Tailwind CSS v4 · GSAP + ScrollTrigger · Lenis smooth scroll · Motion (`motion/react`) · self-hosted fonts via `@fontsource`. No database, no paid services, no API keys.
 
@@ -22,17 +22,17 @@ npm start
 
 | Section | What it does |
 | --- | --- |
-| Hero | Headline + Urdu tagline, 4.9★ Foodpanda proof, 3-card dish stack with scroll parallax, real review card |
-| Ribbon | Tilted marquee of signature dishes |
-| Sab ki pasand | The 6 most-ordered dishes. **Signature motion:** "pill wave", a diagonal bouncy stagger |
-| Handi se darwaze tak | **Free scroll-world:** pinned stage, scroll rotates a plate while each chapter's dish wipes in through a growing circle, a progress ring fills, and spices drift at different depths. No video, no Higgsfield credits |
-| Order direct band | The one deep-colour band: mirch level, WhatsApp ordering, cash on delivery |
-| Full menu | All 50 Foodpanda items, sticky category chips with scrollspy, live search, compact list on mobile |
-| Item sheet | Mirch level (kam/normal/tez, since reviews asked for fewer chillies), paid sides, special note, qty stepper, live price |
-| Cart → checkout | Drawer (desktop) / bottom sheet (mobile), Delivery/Pickup, PK phone validation, cutlery opt-in, then sends the whole order to WhatsApp |
-| Reviews | 14 real Foodpanda reviews in two counter-scrolling rows |
-| Timings & map | Live "Open now" in Pakistan time, today's row highlighted, Google Maps embed |
-| FAQ | Native accordions + FAQPage schema |
+| Hero | "Love at first bite." headline, the owner's flyer art, two deal tiles, a real Google review, scroll parallax |
+| Ribbon | Tilted marquee of dishes |
+| Top deals | Six picks. **Signature motion:** "pill wave", a diagonal bouncy stagger |
+| Counter se darwaze tak | **Free scroll-world:** pinned stage, a rotating plate, circle-wipe chapters, a progress ring and drifting spices |
+| Order direct band | Drink and spice choice, WhatsApp ordering, free delivery within 2 km (Rs 350+) |
+| Deals marquee | Every flyer deal as a ticket in two counter-scrolling rows (pauses on hover, add from the ticket), plus the Google review |
+| Full menu | Student deals, deals, family deal, fries (S/L), drinks. Sticky chips with scrollspy and live search |
+| Item sheet | Cold drink pick, spice level, fries size, note, qty stepper, live price |
+| Cart → checkout | Drawer / bottom sheet, Delivery/Pickup, free-delivery rule, PK phone validation, then a WhatsApp handoff |
+| Timings & map | Live "Open now" in Pakistan time, today highlighted, Google Maps embed |
+| FAQ | Delivery, party orders, payment. Native accordions + FAQPage schema |
 
 ## SEO built in
 
@@ -43,15 +43,15 @@ npm start
 
 ## ⚠ Confirm with the client before going live
 
-All of these live in **`src/lib/site.js`**, `src/lib/menu.js` or `src/lib/hours.js`:
+Client: **Desi Bite — Chinese & Fast Food**, Ehsan Plaza #14, Shop #1, Commercial Avenue, Sector A, Bahria Enclave, Islamabad. Data comes from the owner's own menu flyer plus public map listings. Everything lives in `src/lib/site.js`, `src/lib/menu.js` and `src/lib/hours.js`.
 
-1. **Name**: Foodpanda says "Desi Bites", Google/Facebook say "Desi Bite".
-2. **WhatsApp / phone**: `923425554160` came from a public map listing, not from the client.
-3. **Address**: Foodpanda says House 15, Street 25, Korang Town. Google Maps shows "Desi Bite" in Bahria Enclave Sector A. Also check the map pin (`geo`).
-4. **Prices**: these are Foodpanda list prices. Direct orders can be cheaper (no commission).
-5. **Hours**: copied from Foodpanda (every day till 3 AM).
-6. **Photos**: loaded from the client's Foodpanda CDN. Put real photos in `/public/dishes/` and change `image` paths.
-7. **Instagram handle**: goes in `site.links.instagram`.
+1. **Prices**: copied from the flyer, which looks like the 2020 opening print, so they are probably out of date.
+2. **Full menu**: the flyer lists only deals, fries and drinks. Add single items (zinger burger, shawarma, chowmein, fried rice, shashlik…) and drink prices.
+3. **Phones**: 0342-5554160 and 0313-5817771 (an older print shows 0304-9991978). WhatsApp is 0312-9112607.
+4. **Hours**: 12 PM – 12:30 AM daily, from the public map listing.
+5. **Photos**: no dish photos yet. Items show branded emoji tiles. Put real photos in `/public/dishes/` and set `image` on each item.
+6. **Reviews**: there is only one clearly positive public Google review so far. Ask the owner to collect more; never invent them.
+7. **Demo mode**: `demoMode: true` makes WhatsApp open the contact picker instead of messaging the shop. Set it to `false` at launch.
 8. **Domain**: set `NEXT_PUBLIC_SITE_URL` in Vercel.
 
 ## Deploy (free)

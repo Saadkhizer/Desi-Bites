@@ -10,7 +10,7 @@ import DishImage from "@/components/ui/DishImage";
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 /**
- * "Handi se darwaze tak" — the free scroll-world.
+ * "Counter se darwaze tak" — the free scroll-world.
  * One pinned stage; scroll scrubs a plate that rotates while each chapter's
  * dish wipes in through a growing circle, a progress ring fills, and spices
  * drift at different depths. No video, no paid generation — just transforms
@@ -20,28 +20,28 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
  */
 const chapters = [
   {
-    kicker: "01 · Subah",
-    title: "Taaza cheezon se shuru.",
-    body: "Sabzi, daal, chicken — every handi starts fresh. Read our reviews and you'll see one word again and again: fresh.",
-    dish: "mix-vegetables",
+    kicker: "01 · Order",
+    title: "Deal chunein, bas.",
+    body: "Pick a deal, choose your drink and spice level, and your order goes straight to the kitchen on WhatsApp. No app, no signup.",
+    dish: "deal-1",
   },
   {
-    kicker: "02 · Handi",
-    title: "Dheemi aanch, poora dum.",
-    body: "Cooked low and slow, the way ammi makes it. Balanced masalay, and mirch set the way you ask for it.",
-    dish: "kofta-curry",
+    kicker: "02 · Fryer & wok",
+    title: "Garam tel, tez aanch.",
+    body: "Zingers fried crisp to order, chowmein and fried rice tossed on high flame, shashlik in its saucy best.",
+    dish: "deal-5",
   },
   {
     kicker: "03 · Packing",
-    title: "Saaf suthri, seal-band packing.",
-    body: "A hygienic kitchen and neat, sealed boxes. Customers keep writing about the packing almost as much as the food.",
-    dish: "chana-pulao-raita",
+    title: "Garam garam, seal band.",
+    body: "Shawarmas rolled tight, fries kept crisp, everything packed hot so it reaches you the way it left the counter.",
+    dish: "student-2",
   },
   {
     kicker: "04 · Darwaza",
-    title: "Garam garam, aap ke ghar.",
-    body: "Out of the kitchen and to your door while it's still steaming — lunch, dinner, or a 2 AM daal chawal craving.",
-    dish: "daal-chawal",
+    title: "2 km tak, free.",
+    body: "Free home delivery within 2 km of Bahria Enclave, Sector A, on orders over Rs 350. Party and function orders too.",
+    dish: "family",
   },
 ];
 
@@ -108,7 +108,7 @@ export default function KitchenStory() {
       <div className="mx-auto max-w-7xl px-4 pt-[var(--section-gap)] sm:px-6 lg:px-8">
         <p className="text-sm font-bold uppercase tracking-[0.2em] text-deep">Our kitchen</p>
         <h2 id="story-title" className="mt-2 max-w-3xl text-[clamp(2rem,5vw,3.6rem)] font-extrabold leading-[1] tracking-[-0.03em]">
-          Handi se <span className="flourish text-deep">darwaze</span> tak.
+          Counter se <span className="flourish text-deep">darwaze</span> tak.
         </h2>
       </div>
 
@@ -137,7 +137,7 @@ export default function KitchenStory() {
                 <div data-plate className="relative h-full w-full overflow-hidden rounded-full will-change-transform">
                   {chapters.map((c, i) => (
                     <div key={c.dish} data-dish className="absolute inset-0 overflow-hidden rounded-full">
-                      <DishImage src={byId[c.dish].image} alt={byId[c.dish].name} sizes="(max-width: 768px) 78vw, 42vw" />
+                      <DishImage src={byId[c.dish].image} art={byId[c.dish].art} alt={byId[c.dish].name} emojiScale={1.5} sizes="(max-width: 768px) 78vw, 42vw" />
                     </div>
                   ))}
                 </div>
@@ -169,7 +169,7 @@ export default function KitchenStory() {
           {chapters.map((c) => (
             <li key={c.kicker} className="rounded-[var(--radius-card)] bg-surface p-3">
               <div className="relative aspect-square overflow-hidden rounded-full">
-                <DishImage src={byId[c.dish].image} alt={byId[c.dish].name} sizes="(max-width: 640px) 90vw, 25vw" />
+                <DishImage src={byId[c.dish].image} art={byId[c.dish].art} alt={byId[c.dish].name} sizes="(max-width: 640px) 90vw, 25vw" />
               </div>
               <p className="mt-4 px-2 text-sm font-bold uppercase tracking-[0.18em] text-deep">{c.kicker}</p>
               <h3 className="mt-1 px-2 text-xl font-extrabold">{c.title}</h3>

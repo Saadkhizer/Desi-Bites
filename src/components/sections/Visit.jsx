@@ -17,7 +17,7 @@ export default function Visit() {
         <div data-reveal className="rounded-[var(--radius-band)] bg-surface p-6 sm:p-10">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-deep">Timings & location</p>
           <h2 id="visit-title" className="mt-2 text-[clamp(2rem,4.5vw,3.2rem)] font-extrabold leading-[1] tracking-[-0.03em]">
-            Raat <span className="flourish text-deep">3 baje</span> tak.
+            Raat <span className="flourish text-deep">12:30</span> tak.
           </h2>
           <OpenBadge className="mt-5 !bg-background" />
 
@@ -38,7 +38,7 @@ export default function Visit() {
           <address className="mt-8 flex gap-3 not-italic">
             <IconPin className="mt-0.5 h-5 w-5 shrink-0 text-deep" />
             <span>
-              {a.street}, {a.city}
+              {a.street}, {a.area}, {a.city}
             </span>
           </address>
 
@@ -46,8 +46,8 @@ export default function Visit() {
             <a href={waLink(`Assalam o Alaikum! Kya aaj order le rahe hain?`)} target="_blank" rel="noopener" className="btn btn-deep">
               <IconWhatsApp className="h-5 w-5" /> WhatsApp
             </a>
-            <a href={`tel:+${site.whatsapp}`} className="btn btn-ghost">
-              <IconPhone className="h-5 w-5" /> {site.phoneDisplay}
+            <a href={`tel:${site.phones[0].tel}`} className="btn btn-ghost">
+              <IconPhone className="h-5 w-5" /> {site.phones[0].display}
             </a>
             <a href={directions} target="_blank" rel="noopener" className="btn btn-ghost">
               <IconPin className="h-5 w-5" /> Directions
@@ -63,14 +63,9 @@ export default function Visit() {
             referrerPolicy="no-referrer-when-downgrade"
             className="absolute inset-0 h-full w-full border-0 grayscale-[35%] sepia-[18%]"
           />
-          <a
-            href={site.links.foodpanda}
-            target="_blank"
-            rel="noopener"
-            className="badge-pop absolute bottom-4 left-4 !px-4 !py-2 !text-xs shadow-[var(--shadow-lift)]"
-          >
-            Also on Foodpanda ↗
-          </a>
+          <span className="badge-pop absolute bottom-4 left-4 !px-4 !py-2 !text-xs shadow-[var(--shadow-lift)]">
+            🛵 Free delivery within {site.delivery.freeRadiusKm} km
+          </span>
         </div>
       </Reveal>
     </section>

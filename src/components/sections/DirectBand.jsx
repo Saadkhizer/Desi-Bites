@@ -4,9 +4,9 @@ import { IconFlame, IconWhatsApp, IconCheck } from "@/components/ui/Icons";
 /* The ONE accent-deep band on the page (duotone rule). Pop is allowed as
    large display text here — pop-on-deep is 4.58:1. */
 const points = [
-  { icon: IconFlame, title: "Mirch aap ki marzi", body: "Kam, normal ya tez — choose it on every dish. You asked, the kitchen listens." },
+  { icon: IconFlame, title: "Aap ki marzi", body: "Coke, Sprite, 7up ya Pepsi — aur regular, spicy ya extra spicy. Har deal par aap chunein." },
   { icon: IconWhatsApp, title: "No app, no signup", body: "Build your order here, send it on WhatsApp in one tap. The kitchen confirms it there." },
-  { icon: IconCheck, title: "Cash on delivery", body: "Pay when it arrives. Cutlery only if you tick the box, so less waste." },
+  { icon: IconCheck, title: "Free delivery, cash on arrival", body: "Free home delivery within 2 km on orders over Rs 350. Pay when it reaches you." },
 ];
 
 export default function DirectBand() {

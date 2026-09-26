@@ -1,5 +1,5 @@
 /* Tilted marquee ribbon — pure CSS animation, pauses for reduced motion. */
-const words = ["Daal Chawal", "Chicken Haleem", "Chana Pulao", "Lahori Chanay", "Achari Keema", "Chow Mein", "Kofta Curry", "Mutanjan", "Elaichi Chai"];
+const words = ["Zinger Burger", "Chicken Shawarma", "Chowmein", "Fried Rice", "Shashlik", "Club Sandwich", "Mayo Fries", "Pizza Burger", "Drumsticks"];
 
 export default function Ribbon() {
   const row = [...words, ...words];

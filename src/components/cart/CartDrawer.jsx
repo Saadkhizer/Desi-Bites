@@ -97,12 +97,12 @@ function Drawer({ onClose }) {
               {lines.map((l) => (
                 <li key={l.key} className="flex gap-3 rounded-2xl bg-surface p-2.5">
                   <div className="relative h-18 w-18 shrink-0 overflow-hidden rounded-xl">
-                    <DishImage src={byId[l.id]?.image} alt="" sizes="72px" />
+                    <DishImage src={byId[l.id]?.image} art={byId[l.id]?.art} alt="" sizes="72px" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between gap-2">
                       <p className="font-bold leading-tight">{l.name}</p>
-                      <p className="shrink-0 font-bold text-deep">{formatPKR(l.unitPrice * l.qty)}</p>
+                      <p className="shrink-0 font-bold text-deep">{l.unitPrice == null ? formatPKR(null) : formatPKR(l.unitPrice * l.qty)}</p>
                     </div>
                     {l.summary && <p className="mt-0.5 truncate text-xs text-muted">{l.summary}</p>}
                     {l.note && <p className="truncate text-xs italic text-muted">“{l.note}”</p>}
@@ -119,7 +119,7 @@ function Drawer({ onClose }) {
                 </li>
               ))}
             </ul>
-            <Totals subtotal={subtotal} count={count} mode={form.mode} />
+            <Totals subtotal={subtotal} count={count} mode={form.mode} unpriced={lines.some((l) => l.unitPrice == null)} />
             <div className="px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:px-6">
               <button type="button" onClick={() => setStep("checkout")} className="btn btn-deep !min-h-14 w-full text-base">
                 Checkout — {formatPKR(subtotal)}
@@ -168,7 +168,7 @@ function Drawer({ onClose }) {
                 <span className="font-medium">Send cutlery (spoon/fork)</span>
               </label>
             </div>
-            <Totals subtotal={subtotal} count={count} mode={form.mode} />
+            <Totals subtotal={subtotal} count={count} mode={form.mode} unpriced={lines.some((l) => l.unitPrice == null)} />
             <div className="grid gap-2 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:px-6">
               <button type="submit" className="btn !min-h-14 w-full bg-positive text-base text-on-deep">
                 <IconWhatsApp className="h-5 w-5" /> Send order on WhatsApp
@@ -184,11 +184,12 @@ function Drawer({ onClose }) {
   );
 }
 
-function Totals({ subtotal, count, mode }) {
+function Totals({ subtotal, count, mode, unpriced }) {
   return (
     <dl className="mx-5 my-4 space-y-1.5 rounded-2xl border border-border p-4 text-sm sm:mx-6">
       <div className="flex justify-between"><dt className="text-muted">Items ({count})</dt><dd className="font-semibold">{formatPKR(subtotal)}</dd></div>
-      <div className="flex justify-between"><dt className="text-muted">{mode === "delivery" ? "Delivery" : "Pickup"}</dt><dd className="font-semibold">{mode === "delivery" ? "Confirmed on WhatsApp" : "Free"}</dd></div>
+      <div className="flex justify-between"><dt className="text-muted">{mode === "delivery" ? "Delivery" : "Pickup"}</dt><dd className="font-semibold">{mode === "delivery" ? (subtotal >= site.delivery.minOrder ? `Free within ${site.delivery.freeRadiusKm} km` : `Free over Rs ${site.delivery.minOrder}`) : "Free"}</dd></div>
+      {unpriced && <div className="flex justify-between"><dt className="text-muted">Cold drinks</dt><dd className="font-semibold">Price on WhatsApp</dd></div>}
       <div className="flex justify-between"><dt className="text-muted">Payment</dt><dd className="font-semibold">Cash</dd></div>
       <div className="flex justify-between border-t border-border pt-2 text-base"><dt className="font-bold">Subtotal</dt><dd className="font-extrabold text-deep">{formatPKR(subtotal)}</dd></div>
     </dl>

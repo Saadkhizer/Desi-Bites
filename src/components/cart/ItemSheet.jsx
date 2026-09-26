@@ -37,6 +37,7 @@ function Sheet({ item, onClose }) {
   useDialog(true, ref, close);
 
   const unit = useMemo(() => {
+    if (item.price == null) return null;
     let p = item.price;
     (item.options || []).forEach((g) => {
       const v = sel[g.id];
@@ -84,7 +85,7 @@ function Sheet({ item, onClose }) {
       >
         <div className="flex-1 overflow-y-auto overscroll-contain" data-lenis-prevent>
           <div className="relative aspect-[16/10] w-full">
-            <DishImage src={item.image} alt={item.name} sizes="(max-width: 640px) 100vw, 512px" />
+            <DishImage src={item.image} art={item.art} alt={item.name} sizes="(max-width: 640px) 100vw, 512px" />
             <button
               type="button"
               data-autofocus
@@ -141,7 +142,7 @@ function Sheet({ item, onClose }) {
                             className="h-5 w-5 accent-[var(--accent-deep)]"
                           />
                           <span className="font-medium">
-                            {g.id === "spice" && <span aria-hidden className="mr-1">{c.id === "kam" ? "🌶" : c.id === "normal" ? "🌶🌶" : "🌶🌶🌶"}</span>}
+                            {g.id === "spice" && <span aria-hidden className="mr-1">{{ regular: "🌶", spicy: "🌶🌶", extra: "🌶🌶🌶" }[c.id]}</span>}
                             {c.label}
                           </span>
                         </span>
@@ -184,7 +185,7 @@ function Sheet({ item, onClose }) {
             </button>
           </div>
           <button type="button" onClick={onAdd} className="btn btn-deep !min-h-13 flex-1 text-base">
-            Add — {formatPKR(unit * qty)}
+            Add — {unit == null ? "price on WhatsApp" : formatPKR(unit * qty)}
           </button>
         </div>
       </motion.div>

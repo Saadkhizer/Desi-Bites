@@ -2,10 +2,9 @@ import { site } from "@/lib/site";
 import { categories, menu } from "@/lib/menu";
 import { openingHoursSchema } from "@/lib/hours";
 import { faq } from "@/lib/faq";
-import { reviews } from "@/lib/reviews";
 
 /**
- * Structured data for Google: Restaurant (+ full Menu, hours, rating,
+ * Structured data for Google: Restaurant (+ full Menu, hours, address,
  * reviews) and FAQPage. Rendered server-side; `<` escaped per Next docs.
  */
 export default function JsonLd() {
@@ -16,8 +15,10 @@ export default function JsonLd() {
     name: site.name,
     description: site.description,
     url: site.url,
-    telephone: `+${site.whatsapp}`,
-    image: [menu.find((m) => m.id === "daal-chawal")?.image],
+    telephone: site.phones[0].tel,
+    image: [`${site.url}/brand/logo.png`, `${site.url}/brand/food-collage.jpg`],
+    logo: `${site.url}/brand/logo.png`,
+    slogan: site.tagline,
     servesCuisine: site.cuisines,
     priceRange: site.priceRange,
     acceptsReservations: false,
@@ -33,20 +34,7 @@ export default function JsonLd() {
     },
     geo: { "@type": "GeoCoordinates", latitude: site.address.geo.lat, longitude: site.address.geo.lng },
     openingHoursSpecification: openingHoursSchema(),
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: site.rating.value,
-      reviewCount: site.rating.count,
-      bestRating: 5,
-    },
-    review: reviews.slice(0, 5).map((r) => ({
-      "@type": "Review",
-      author: { "@type": "Person", name: r.name },
-      datePublished: r.date,
-      reviewBody: r.text,
-      reviewRating: { "@type": "Rating", ratingValue: 5, bestRating: 5 },
-    })),
-    sameAs: [site.links.facebook, site.links.foodpanda, site.links.instagram].filter(Boolean),
+    sameAs: [site.links.facebook, site.links.instagram].filter(Boolean),
     hasMenu: {
       "@type": "Menu",
       name: `${site.name} Menu`,
@@ -59,9 +47,7 @@ export default function JsonLd() {
             "@type": "MenuItem",
             name: m.name,
             description: m.desc,
-            image: m.image,
-            suitableForDiet: m.tags?.includes("veg") ? "https://schema.org/VegetarianDiet" : undefined,
-            offers: { "@type": "Offer", price: m.price, priceCurrency: "PKR" },
+            offers: m.price == null ? undefined : { "@type": "Offer", price: m.price, priceCurrency: "PKR" },
           })),
       })),
     },

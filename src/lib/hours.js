@@ -1,16 +1,16 @@
 /**
- * Opening hours from the Foodpanda listing. Every day runs past midnight
- * and closes at 3:00 AM. Times are 24h, Asia/Karachi.
- * ⚠ CONFIRM with the client — Foodpanda hours are sometimes delivery-only.
+ * Opening hours — from the public map listing for Desi Bite, Bahria Enclave
+ * ("opens 12:00 PM, open until 12:30 AM"). Same every day there.
+ * ⚠ CONFIRM with the owner (especially Friday prayer time and Sundays).
  */
 export const hours = [
-  { day: 1, label: "Monday", open: "20:00", close: "03:00" },
-  { day: 2, label: "Tuesday", open: "13:00", close: "03:00" },
-  { day: 3, label: "Wednesday", open: "13:45", close: "03:00" },
-  { day: 4, label: "Thursday", open: "13:00", close: "03:00" },
-  { day: 5, label: "Friday", open: "14:30", close: "03:00" },
-  { day: 6, label: "Saturday", open: "13:00", close: "03:00" },
-  { day: 0, label: "Sunday", open: "18:00", close: "03:00" },
+  { day: 1, label: "Monday", open: "12:00", close: "00:30" },
+  { day: 2, label: "Tuesday", open: "12:00", close: "00:30" },
+  { day: 3, label: "Wednesday", open: "12:00", close: "00:30" },
+  { day: 4, label: "Thursday", open: "12:00", close: "00:30" },
+  { day: 5, label: "Friday", open: "12:00", close: "00:30" },
+  { day: 6, label: "Saturday", open: "12:00", close: "00:30" },
+  { day: 0, label: "Sunday", open: "12:00", close: "00:30" },
 ];
 
 const toMin = (hhmm) => {

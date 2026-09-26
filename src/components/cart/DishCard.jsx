@@ -33,12 +33,13 @@ export default function DishCard({ item, featured = false, headingLevel = "h3" }
       >
         <DishImage
           src={item.image}
+          art={item.art}
           alt={item.name}
           sizes={featured ? "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 380px" : "(max-width: 640px) 112px, (max-width: 1024px) 45vw, 300px"}
           className="transition-transform duration-700 ease-out group-hover:scale-[1.06]"
         />
         <span className={`absolute left-2 top-2 flex gap-1.5 ${featured ? "" : "max-sm:hidden"}`}>
-          {isPopular && <span className="badge-pop">★ Best Seller</span>}
+          {isPopular && <span className="badge-pop">★ Top pick</span>}
           {isVeg && (
             <span className="badge-soft">
               <IconLeaf className="h-3 w-3 text-positive" /> Veg
@@ -53,9 +54,9 @@ export default function DishCard({ item, featured = false, headingLevel = "h3" }
           <span className="shrink-0 pt-0.5 text-[0.95rem] font-extrabold text-deep">{formatPKR(item.price)}</span>
         </div>
         <p className="mt-1.5 line-clamp-2 text-sm leading-snug text-muted">{item.desc}</p>
-        {!featured && isPopular && <span className="badge-pop mt-2 self-start sm:hidden">★ Best Seller</span>}
+        {!featured && isPopular && <span className="badge-pop mt-2 self-start sm:hidden">★ Top pick</span>}
         <div className="mt-auto flex items-center justify-between pt-3 sm:pt-4">
-          <span className={`text-xs font-medium text-muted ${featured ? "" : "max-sm:hidden"}`}>{item.options?.some((o) => o.id === "spice") ? "🌶 Mirch aap ki marzi" : " "}</span>
+          <span className={`text-xs font-medium text-muted ${featured ? "" : "max-sm:hidden"}`}>{hint(item)}</span>
           <button
             type="button"
             onClick={onAdd}
@@ -68,4 +69,13 @@ export default function DishCard({ item, featured = false, headingLevel = "h3" }
       </div>
     </article>
   );
+}
+
+function hint(item) {
+  const ids = (item.options || []).map((o) => o.id);
+  if (ids.includes("drink")) return "🥤 Drink aap ki pasand";
+  if (ids.includes("size")) return "🍟 Small ya Large";
+  if (ids.includes("spice")) return "🌶 Spicy ya regular";
+  if (item.price == null) return "Price on WhatsApp";
+  return "\u00a0";
 }

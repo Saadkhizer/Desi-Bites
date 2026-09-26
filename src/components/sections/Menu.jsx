@@ -70,7 +70,7 @@ export default function Menu() {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search — haleem, pulao, chai…"
+              placeholder="Search — zinger, shawarma, fries…"
               className="h-13 w-full rounded-full border border-border bg-surface pl-12 pr-12 text-base outline-none placeholder:text-muted/80 focus:border-deep"
             />
             {query && (
@@ -121,7 +121,7 @@ export default function Menu() {
               </div>
             ) : (
               <p className="mt-6 rounded-[var(--radius-card)] bg-surface p-8 text-center">
-                Nahi mila? WhatsApp karein — kitchen batayega aaj kya bana hai.
+                Nahi mila? WhatsApp karein — kitchen batayega aur kya available hai.
               </p>
             )}
           </div>

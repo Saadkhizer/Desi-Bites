@@ -1,17 +1,19 @@
+import Image from "next/image";
 import { site } from "@/lib/site";
 import { byId, formatPKR } from "@/lib/menu";
+import { reviews } from "@/lib/reviews";
 import DishImage from "@/components/ui/DishImage";
 import Magnetic from "@/components/motion/Magnetic";
-import { IconArrow, IconStar, IconWhatsApp, IconLeaf } from "@/components/ui/Icons";
+import { IconArrow, IconStar, IconWhatsApp } from "@/components/ui/Icons";
 import { waLink } from "@/lib/whatsapp";
 import HeroParallax from "./HeroParallax";
 
 /* Nothing above the fold waits for an animation — the hero paints instantly.
-   Only the photo stack gets a gentle scroll parallax (HeroParallax). */
+   Only the card stack gets a gentle scroll parallax (HeroParallax). */
 export default function Hero() {
-  const a = byId["daal-chawal"];
-  const b = byId["chicken-haleem"];
-  const c = byId["chicken-chowmein"];
+  const a = byId["deal-1"];
+  const b = byId["student-2"];
+  const review = reviews[0];
 
   return (
     <section id="top" className="relative overflow-hidden">
@@ -19,16 +21,14 @@ export default function Hero() {
         {/* copy */}
         <div className="relative z-10">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="badge-pop">
-              <IconStar className="h-3.5 w-3.5" /> {site.rating.value} on {site.rating.source}
-            </span>
-            <span className="badge-soft bg-surface">{site.rating.count.toLocaleString()}+ ratings</span>
+            <span className="badge-pop">🔥 {site.category}</span>
+            <span className="badge-soft bg-surface">📍 {site.address.area}, Sector A</span>
           </div>
 
           <h1 className="mt-6 text-[clamp(2.7rem,7.2vw,5.6rem)] font-extrabold leading-[0.95] tracking-[-0.035em]">
-            Ghar jaisa khana,
+            Love at
             <br />
-            roz <span className="flourish text-deep text-[1.12em] leading-none">taaza.</span>
+            first <span className="flourish text-deep text-[1.12em] leading-none">bite.</span>
           </h1>
 
           <p className="urdu mt-3 text-2xl text-muted sm:text-[1.7rem]" lang="ur">
@@ -36,14 +36,15 @@ export default function Hero() {
           </p>
 
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
-            Daal chawal, chicken haleem, chana pulao, Lahori chanay — cooked fresh every day in
-            our Islamabad kitchen, packed hygienically and delivered hot. Mirch aap ki marzi ki.
+            Zinger burgers, shawarma, chowmein, fried rice aur shashlik — plus deals jo jeb par
+            halkay hain. Free home delivery within {site.delivery.freeRadiusKm} km on orders over Rs{" "}
+            {site.delivery.minOrder}.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Magnetic>
               <a href="#menu" className="btn btn-deep !min-h-14 !px-7 text-base">
-                See the menu <IconArrow className="h-5 w-5" />
+                See the deals <IconArrow className="h-5 w-5" />
               </a>
             </Magnetic>
             <a
@@ -58,9 +59,9 @@ export default function Hero() {
 
           <dl className="mt-10 grid max-w-lg grid-cols-3 gap-3">
             {[
-              ["45+", "dishes, daily"],
-              ["100%", "homemade"],
-              ["3 AM", "open till late"],
+              ["8", "value deals"],
+              [`${site.delivery.freeRadiusKm} km`, "free delivery"],
+              ["Party", "& function orders"],
             ].map(([k, v]) => (
               <div key={v} className="rounded-2xl bg-surface px-4 py-3">
                 <dt className="sr-only">{v}</dt>
@@ -71,37 +72,51 @@ export default function Hero() {
           </dl>
         </div>
 
-        {/* photo stack — in-frame rounded cards, never cut-outs (duotone rule) */}
+        {/* card stack — the owner's own flyer art + two deal tiles */}
         <HeroParallax>
-          <div className="relative mx-auto aspect-[1/1.14] w-full max-w-[560px]">
-            <div data-par="0.12" className="absolute left-0 top-[6%] w-[56%] rotate-[-4deg]">
-              <HeroCard item={a} badge="Best Seller" priority />
-            </div>
-            <div data-par="-0.08" className="absolute right-0 top-0 w-[42%] rotate-[5deg]">
-              <HeroCard item={b} badge="Must try" small />
-            </div>
-            <div data-par="0.2" className="absolute bottom-0 right-[3%] w-[46%] rotate-[-2deg]">
-              <HeroCard item={c} badge="10/10" small />
-            </div>
-
-            <figure
-              data-par="-0.16"
-              className="absolute bottom-[8%] left-[-2%] w-[58%] max-w-[270px] rotate-[2deg] rounded-[var(--radius-card)] bg-deep p-4 text-on-deep shadow-[var(--shadow-lift)]"
-            >
-              <div className="flex gap-0.5 text-pop" aria-label="5 stars">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <IconStar key={i} className="h-4 w-4" />
-                ))}
+          <div className="relative mx-auto aspect-[1/1.08] w-full max-w-[560px]">
+            <div data-par="0.1" className="absolute left-0 top-[4%] w-[72%] rotate-[-3deg]">
+              <div className="rounded-[calc(var(--radius-card)+6px)] bg-surface p-2.5 shadow-[var(--shadow-lift)]">
+                <div className="relative aspect-[764/504] overflow-hidden rounded-[var(--radius-card)] bg-pop">
+                  <Image
+                    src="/brand/food-collage.jpg"
+                    alt="Desi Bite zinger burgers, shawarma, sandwiches and fries"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 72vw, 400px"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="flex items-baseline justify-between gap-2 px-1.5 pb-1 pt-2.5">
+                  <span className="text-base font-bold leading-tight">Chinese & Fast Food</span>
+                  <span className="text-sm font-bold text-deep">Sector A</span>
+                </div>
               </div>
-              <blockquote className="mt-2 text-sm leading-snug">
-                “Mom’s gone for Hajj, was craving her daal chawal. Waqae maza agaya.”
-              </blockquote>
-              <figcaption className="mt-2 text-xs opacity-80">Abdullah · Foodpanda review</figcaption>
-            </figure>
+            </div>
 
-            <span className="absolute left-[4%] top-[-2%] hidden rotate-[-8deg] items-center gap-1.5 rounded-full bg-background px-3 py-2 text-xs font-bold shadow-[var(--shadow-lift)] sm:inline-flex">
-              <IconLeaf className="h-4 w-4 text-positive" /> Fresh daily
-            </span>
+            <div data-par="-0.08" className="absolute right-0 top-[30%] w-[40%] rotate-[5deg]">
+              <HeroCard item={a} badge="Rs 370 only" />
+            </div>
+            <div data-par="0.2" className="absolute bottom-0 right-[18%] w-[38%] rotate-[-4deg]">
+              <HeroCard item={b} badge="Student" />
+            </div>
+
+            {review && (
+              <figure
+                data-par="-0.16"
+                className="absolute bottom-[4%] left-[-2%] w-[50%] max-w-[250px] rotate-[2deg] rounded-[var(--radius-card)] bg-deep p-4 text-on-deep shadow-[var(--shadow-lift)]"
+              >
+                <div className="flex gap-0.5 text-pop" aria-label={`${review.stars} stars`}>
+                  {Array.from({ length: review.stars }).map((_, i) => (
+                    <IconStar key={i} className="h-4 w-4" />
+                  ))}
+                </div>
+                <blockquote className="mt-2 text-sm leading-snug">“{review.text}”</blockquote>
+                <figcaption className="mt-2 text-xs opacity-80">
+                  {review.name} · {review.source} review
+                </figcaption>
+              </figure>
+            )}
           </div>
         </HeroParallax>
       </div>
@@ -109,21 +124,21 @@ export default function Hero() {
   );
 }
 
-function HeroCard({ item, badge, small = false, priority = false }) {
+function HeroCard({ item, badge }) {
   return (
-    <div className="rounded-[calc(var(--radius-card)+6px)] bg-surface p-2.5 shadow-[var(--shadow-lift)]">
+    <div className="rounded-[calc(var(--radius-card)+6px)] bg-surface p-2 shadow-[var(--shadow-lift)]">
       <div className="relative aspect-square overflow-hidden rounded-[var(--radius-card)]">
         <DishImage
           src={item.image}
+          art={item.art}
           alt={item.name}
-          priority={priority}
-          sizes={small ? "(max-width: 1024px) 45vw, 260px" : "(max-width: 1024px) 62vw, 360px"}
+          sizes="(max-width: 1024px) 40vw, 230px"
         />
-        <span className="badge-pop absolute left-2.5 top-2.5">{badge}</span>
+        <span className="badge-pop absolute left-2 top-2 !bg-background">{badge}</span>
       </div>
-      <div className="flex items-baseline justify-between gap-2 px-1.5 pb-1 pt-2.5">
-        <span className={`font-bold leading-tight ${small ? "text-sm" : "text-base"}`}>{item.name}</span>
-        <span className={`shrink-0 font-bold text-deep ${small ? "text-xs" : "text-sm"}`}>{formatPKR(item.price)}</span>
+      <div className="flex items-baseline justify-between gap-2 px-1.5 pb-1 pt-2">
+        <span className="text-sm font-bold leading-tight">{item.name}</span>
+        <span className="shrink-0 text-xs font-bold text-deep">{formatPKR(item.price)}</span>
       </div>
     </div>
   );

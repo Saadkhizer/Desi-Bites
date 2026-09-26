@@ -43,9 +43,9 @@ export default function Popular() {
     <section aria-labelledby="popular-title" className="mx-auto max-w-7xl px-4 pt-[var(--section-gap)] sm:px-6 lg:px-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-deep">Most ordered right now</p>
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-deep">Top deals</p>
           <h2 id="popular-title" className="mt-2 text-[clamp(2rem,5vw,3.6rem)] font-extrabold leading-[1] tracking-[-0.03em]">
-            Sab ki <span className="flourish text-deep">pasand.</span>
+            Deals jo <span className="flourish text-deep">dil jeet lein.</span>
           </h2>
         </div>
         <a href="#menu" className="btn btn-ghost">Full menu →</a>
