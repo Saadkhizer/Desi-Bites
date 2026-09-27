@@ -49,7 +49,7 @@ Client: **Desi Bite — Chinese & Fast Food**, Ehsan Plaza #14, Shop #1, Commerc
 2. **Full menu**: the flyer lists only deals, fries and drinks. Add single items (zinger burger, shawarma, chowmein, fried rice, shashlik…) and drink prices.
 3. **Phones**: 0342-5554160 and 0313-5817771 (an older print shows 0304-9991978). WhatsApp is 0312-9112607.
 4. **Hours**: 12 PM – 12:30 AM daily, from the public map listing.
-5. **Photos**: no dish photos yet. Items show branded emoji tiles. Put real photos in `/public/dishes/` and set `image` on each item.
+5. **Photos**: the restaurant has no product photos online, so each item uses a free Unsplash photo (commercial use allowed, see unsplash.com/license) that matches the dish. They are representative images, and the menu says so. Swap in the owner's real photos (`/public/dishes/` + `image` in `menu.js`) when available.
 6. **Reviews**: there is only one clearly positive public Google review so far. Ask the owner to collect more; never invent them.
 7. **Demo mode**: `demoMode: true` makes WhatsApp open the contact picker instead of messaging the shop. Set it to `false` at launch.
 8. **Domain**: set `NEXT_PUBLIC_SITE_URL` in Vercel.

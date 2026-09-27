@@ -5,6 +5,7 @@ import { reviews } from "@/lib/reviews";
 import { site } from "@/lib/site";
 import { useCart } from "@/components/cart/CartProvider";
 import { IconPlus, IconStar } from "@/components/ui/Icons";
+import DishImage from "@/components/ui/DishImage";
 
 /**
  * Every deal from the flyer as a "ticket", in two counter-scrolling rows
@@ -81,11 +82,11 @@ function Row({ items, className }) {
             aria-hidden={clone || undefined}
             className="relative flex w-[280px] shrink-0 flex-col overflow-hidden rounded-[var(--radius-card)] bg-deep p-5 text-on-deep sm:w-[320px]"
           >
-            <span className="pointer-events-none absolute -right-4 -top-6 select-none text-[6.5rem] leading-none opacity-25" aria-hidden>
-              {d.art?.emoji}
+            <span className="absolute right-4 top-4 h-20 w-20 overflow-hidden rounded-full ring-4 ring-pop/80" aria-hidden>
+              <DishImage src={d.image} art={d.art} alt="" sizes="80px" />
             </span>
             <span className="badge-pop self-start">{d.cat === "student" ? "🎓 Student" : d.cat === "family" ? "👨‍👩‍👧‍👦 Family" : "🔥 Deal"}</span>
-            <h3 className="mt-3 text-2xl font-extrabold tracking-tight">{d.name}</h3>
+            <h3 className="mt-3 pr-20 text-2xl font-extrabold tracking-tight">{d.name}</h3>
             <ul className="mt-2 flex-1 space-y-0.5 text-sm opacity-90">
               {(d.includes || []).map((x) => (
                 <li key={x}>• {x}</li>

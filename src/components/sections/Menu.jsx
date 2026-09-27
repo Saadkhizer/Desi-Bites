@@ -62,6 +62,7 @@ export default function Menu() {
             <h2 id="menu-title" className="mt-2 text-[clamp(2rem,5vw,3.6rem)] font-extrabold leading-[1] tracking-[-0.03em]">
               Aaj kya <span className="flourish text-deep">khayenge?</span>
             </h2>
+            <p className="mt-3 text-sm text-muted">Tasveerein sirf andaaza dene ke liye hain — asal khana is se bhi zabardast. 😉</p>
           </div>
           <label className="relative w-full max-w-sm">
             <span className="sr-only">Search the menu</span>
